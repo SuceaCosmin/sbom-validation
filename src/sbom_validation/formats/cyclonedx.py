@@ -7,25 +7,10 @@ skips missing or wrong-typed values instead of raising.
 import re
 from typing import Any
 
+from sbom_validation.formats._tolerant import _dicts, _str, _strs
 from sbom_validation.model import Component, Party, Sbom
 
 _EMAIL = re.compile(r"[^\s<>()@,;]+@[^\s<>()@,;]+\.[^\s<>()@,;]+")
-
-
-def _str(value: Any) -> str | None:
-    return value if isinstance(value, str) else None
-
-
-def _dicts(value: Any) -> list[dict]:
-    if not isinstance(value, list):
-        return []
-    return [item for item in value if isinstance(item, dict)]
-
-
-def _strs(value: Any) -> list[str]:
-    if not isinstance(value, list):
-        return []
-    return [item for item in value if isinstance(item, str)]
 
 
 def _free_text_party(value: Any) -> list[Party]:
