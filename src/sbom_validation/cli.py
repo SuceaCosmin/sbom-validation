@@ -49,11 +49,25 @@ def _combinations() -> str:
     )
 
 
+_EXIT_CODES = """Exit codes:
+  0  OK: no requirement failed
+  1  at least one requirement failed
+  2  input problem: the SBOM could not be read, parsed or schema-validated
+  3  usage, configuration or unsupported-format error
+  4  internal error
+"""
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = _Parser(
         prog="sbom-validation",
         description="Validate an SBOM (CycloneDX or SPDX 2.x JSON) against a standard.",
-        epilog=f"Supported standard and version combinations: {_combinations()}.",
+        epilog=(
+            f"Supported standard and version combinations: {_combinations()}."
+            + "\n\n"
+            + _EXIT_CODES
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("sbom_path", metavar="SBOM_PATH", type=Path, help="SBOM file")
     parser.add_argument("--standard", required=True, help="standard to check against")
