@@ -7,6 +7,11 @@ from sbom_validation.results import Report, Status
 MAX_FINDINGS = 10
 
 
+def _ascii(text: str) -> str:
+    """Show non-ASCII characters as escapes so legacy consoles never fail."""
+    return text.encode("ascii", "backslashreplace").decode("ascii")
+
+
 def render_console(report: Report) -> str:
     """Render a short summary: header, counts, failed rows with findings."""
     lines = [
@@ -20,7 +25,7 @@ def render_console(report: Report) -> str:
         lines.append("Input problem")
         lines.append("-------------")
         lines.extend(report.problem.splitlines())
-        return "\n".join(lines) + "\n"
+        return _ascii("\n".join(lines) + "\n")
 
     counts = report.counts()
     lines.append(
@@ -46,4 +51,4 @@ def render_console(report: Report) -> str:
             f"{manual} requirement(s) cannot be verified automatically "
             "and need manual review."
         )
-    return "\n".join(lines) + "\n"
+    return _ascii("\n".join(lines) + "\n")

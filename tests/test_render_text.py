@@ -64,7 +64,32 @@ def test_console_lists_failed_rows_and_counts(tmp_path):
     out.encode("ascii")
 
 
+def test_console_echoes_user_text_verbatim_even_if_it_says_compliant():
+    # Ruling: the wording rule covers tool-authored text only; SBOM-derived
+    # text (names, messages, paths) is echoed faithfully, not scrubbed.
+    out = render_console(
+        _report(_row(Status.FAILED, findings=[Finding("compliant-lib", "x")]))
+    )
+    assert "[compliant-lib] x" in out
+
+
+def test_console_output_is_pure_ascii_for_non_ascii_input():
+    row = _row(Status.FAILED, findings=[Finding("café", "naïve ü")])
+    report = Report(STD, VER, "dä/s.json", "CycloneDX", "1.6", (row,), None)
+    out = render_console(report)
+    out.encode("ascii")
+    assert "caf\\xe9" in out and "na\\xefve \\xfc" in out and "d\\xe4/s.json" in out
+    problem = Report(STD, VER, "päth", None, None, (), "fehler über\n  é")
+    pout = render_console(problem)
+    pout.encode("ascii")
+    assert "fehler \\xfcber" in pout and "\\xe9" in pout
+    for r in (_report(_row(Status.NOT_EVALUATED, findings=[Finding("é", "m")])),):
+        render_console(r).encode("ascii")
+
+
 def test_console_never_says_compliant(tmp_path):
+    """Tool-authored wording never uses the word; clean.json avoids the sample
+    file name, which would otherwise echo user-supplied path text."""
     for report in _all_reports(tmp_path):
         out = render_console(report).lower()
         assert "compliant" not in out
