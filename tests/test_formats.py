@@ -3,6 +3,7 @@
 import copy
 import json
 import socket
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -15,6 +16,7 @@ from sbom_validation.formats import (
     to_sbom,
     validate_schema,
 )
+from sbom_validation.formats import schemas
 from sbom_validation.formats.detect import FormatInfo
 
 SAMPLES = Path(__file__).parent / "samples"
@@ -148,6 +150,15 @@ def test_all_samples_are_schema_valid():
 
 
 def test_validation_makes_no_network_call(monkeypatch):
+    # Cold start: drop cached registry and validators so $ref resolution
+    # itself is proven to be offline.
+    schemas._registry.cache_clear()
+    schemas._validator.cache_clear()
+
+    def no_urlopen(*args, **kwargs):
+        raise AssertionError("urlopen attempted")
+
+    monkeypatch.setattr(urllib.request, "urlopen", no_urlopen)
     def boom(*args, **kwargs):
         raise AssertionError("network access attempted")
 

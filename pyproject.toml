@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Standards-based SBOM validation"
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
-dependencies = ["jsonschema (>=4.26.0,<5.0.0)", "license-expression (>=30.4.4,<31.0.0)", "packageurl-python (>=0.17.6,<0.18.0)"]
+dependencies = ["jsonschema (>=4.26.0,<5.0.0)", "license-expression (>=30.4.4,<31.0.0)", "packageurl-python (>=0.17.6,<0.18.0)", "referencing (>=0.37.0,<1.0.0)"]
 
 [project.scripts]
 sbom-validation = "sbom_validation.cli:main"
