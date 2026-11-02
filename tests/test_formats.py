@@ -166,3 +166,10 @@ def test_validation_makes_no_network_call(monkeypatch):
     for path in (CDX, SPDX):
         data = read_json(path)
         validate_schema(data, detect_format(data))
+
+
+def test_unique_items_still_rejects_duplicates():
+    data = json.loads((SAMPLES / "cyclonedx" / "compliant_1_5.json").read_text("utf-8"))
+    data["components"].append(copy.deepcopy(data["components"][0]))
+    with pytest.raises(InputProblem, match="non-unique"):
+        validate_schema(data, FormatInfo("CycloneDX", "1.5"))

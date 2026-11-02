@@ -9,7 +9,8 @@ import json
 from functools import lru_cache
 from importlib import resources
 
-from jsonschema import Draft7Validator
+from jsonschema import Draft7Validator, ValidationError
+from jsonschema.validators import extend
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT7
 
@@ -54,10 +55,41 @@ def _registry() -> Registry:
     return registry
 
 
+def _canonical(value):
+    """JSON text equal exactly when the values are equal under JSON Schema
+    (object key order ignored, 1 == 1.0, true != 1)."""
+    if isinstance(value, float) and value.is_integer():
+        value = int(value)
+    if isinstance(value, dict):
+        return "{" + ",".join(
+            f"{json.dumps(k)}:{_canonical(v)}" for k, v in sorted(value.items())
+        ) + "}"
+    if isinstance(value, list):
+        return "[" + ",".join(_canonical(v) for v in value) + "]"
+    return json.dumps(value)
+
+
+def _unique_items(validator, unique, instance, schema):
+    """Linear-time ``uniqueItems``; jsonschema's is quadratic on objects,
+    which makes SBOMs with tens of thousands of components take minutes."""
+    if not unique or not validator.is_type(instance, "array"):
+        return
+    seen = set()
+    for item in instance:
+        key = _canonical(item)
+        if key in seen:
+            yield ValidationError(f"{instance!r} has non-unique elements")
+            return
+        seen.add(key)
+
+
+_Validator = extend(Draft7Validator, {"uniqueItems": _unique_items})
+
+
 @lru_cache(maxsize=None)
 def _validator(key: tuple[str, str]) -> Draft7Validator:
     schema = _load(_SCHEMA_FILES[key])
-    return Draft7Validator(schema, registry=_registry())
+    return _Validator(schema, registry=_registry())
 
 
 def _path(error) -> str:
