@@ -1,0 +1,82 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-02T09:30:00Z",
+    "authors": [
+      { "name": "Example Build Team", "email": "sbom@example.com" }
+    ],
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:generic/acme-app@1.0.0",
+      "name": "acme-app",
+      "version": "1.0.0",
+      "authors": [{ "name": "Acme Dev", "email": "dev@example.com" }],
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "hashes": [
+        { "alg": "SHA-256", "content": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" }
+      ],
+      "purl": "pkg:generic/acme-app@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.31.0",
+      "name": "requests",
+      "version": "2.31.0",
+      "supplier": {
+        "name": "Python Software Foundation",
+        "url": ["https://pypi.org/project/requests/"],
+        "contact": [{ "name": "Maintainers", "email": "maintainers@example.org" }]
+      },
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "hashes": [
+        { "alg": "SHA-256", "content": "942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1" }
+      ],
+      "purl": "pkg:pypi/requests@2.31.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/psf/requests",
+          "hashes": [
+            { "alg": "SHA-256", "content": "1111111111111111111111111111111111111111111111111111111111111111" }
+          ]
+        },
+        { "type": "distribution", "url": "https://files.pythonhosted.org/requests-2.31.0.tar.gz" }
+      ],
+      "components": [
+        {
+          "type": "library",
+          "bom-ref": "pkg:pypi/urllib3@2.0.7",
+          "name": "urllib3",
+          "version": "2.0.7",
+          "authors": [{ "name": "urllib3 team", "email": "team@example.net" }],
+          "licenses": [{ "expression": "MIT OR Apache-2.0" }],
+          "hashes": [
+            { "alg": "SHA-256", "content": "fdb6d215c776278489906c2f8916e6e7d4f5a9b602ccbcfdf7f016fc8da0596e" }
+          ],
+          "cpe": "cpe:2.3:a:urllib3:urllib3:2.0.7:*:*:*:*:*:*:*"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.4",
+      "name": "idna",
+      "version": "3.4",
+      "authors": [{ "name": "Kim Davies", "email": "kim@example.org" }],
+      "licenses": [{ "license": { "id": "BSD-3-Clause" } }],
+      "hashes": [
+        { "alg": "SHA-256", "content": "90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2" }
+      ]
+    }
+  ],
+  "dependencies": [
+    { "ref": "pkg:generic/acme-app@1.0.0", "dependsOn": ["pkg:pypi/requests@2.31.0", "pkg:pypi/idna@3.4"] },
+    { "ref": "pkg:pypi/requests@2.31.0", "dependsOn": ["pkg:pypi/urllib3@2.0.7", "pkg:pypi/idna@3.4"] },
+    { "ref": "pkg:pypi/urllib3@2.0.7", "dependsOn": [] }
+  ]
+}
