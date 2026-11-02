@@ -2,7 +2,9 @@
 
 Every function takes ``str`` and returns ``bool`` and never raises, whatever
 the input. Nothing here touches the network or the filesystem at call time
-(the SPDX licence list is bundled in the ``license-expression`` package).
+(the SPDX licence list is bundled in the ``license-expression`` package,
+pinned to ``license-expression==30.4.4`` in ``pyproject.toml`` so the list,
+and with it the verdicts, only change when the pin is deliberately raised).
 """
 
 from __future__ import annotations
