@@ -495,6 +495,29 @@ def test_noassertion_licence_fails(fmt):
     assert "NOASSERTION" in result.findings[0].message
 
 
+def _point_dependencies_at_no_value(data: dict) -> None:
+    """Keep the sample's relationships; point each dependency one at
+    NONE / NOASSERTION, which the mapping does not accept as a statement."""
+    deps = [
+        r
+        for r in data["relationships"]
+        if r["relationshipType"] in ("DEPENDS_ON", "DEPENDENCY_OF")
+    ]
+    for i, rel in enumerate(deps):
+        end = (
+            "spdxElementId"
+            if rel["relationshipType"] == "DEPENDENCY_OF"
+            else "relatedSpdxElement"
+        )
+        rel[end] = ("NONE", "NOASSERTION")[i % 2]
+
+
+def test_cmp_deps_fails_when_only_no_value_endpoints():
+    result = evaluate(spdx(_point_dependencies_at_no_value))["REQ_BSI11_CMP_DEPS"]
+    assert result.status is Status.FAILED
+    assert {f.component_ref for f in result.findings} == ALL_FOUR(SPDX)
+
+
 def test_licence_alternatives_pass_if_any_one_holds():
     sbom = replace_component(spdx(), IDNA[SPDX], licenses=("NOASSERTION", "MIT"))
     assert evaluate(sbom)["REQ_BSI11_CMP_LICENCE"].status is Status.PASSED

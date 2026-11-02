@@ -100,6 +100,25 @@ def test_no_relationships_gives_none():
     assert all(c.dependencies is None for c in to_model(data).components)
 
 
+def test_only_none_or_noassertion_dependency_endpoints_give_none():
+    # Keep every relationship of the sample, but point each dependency one
+    # at NONE / NOASSERTION: no real dependency statement is left.
+    data = load()
+    rels = data["relationships"]
+    deps = [r for r in rels if r["relationshipType"] in ("DEPENDS_ON", "DEPENDENCY_OF")]
+    assert len(deps) == 4
+    for i, rel in enumerate(deps):
+        end = "spdxElementId" if rel["relationshipType"] == "DEPENDENCY_OF" else "relatedSpdxElement"
+        rel[end] = ("NONE", "NOASSERTION")[i % 2]
+    assert len(data["relationships"]) == 5
+    assert all(c.dependencies is None for c in to_model(data).components)
+    # One real dependency relationship restores document-wide data.
+    rels.append({"spdxElementId": APP, "relationshipType": "DEPENDS_ON", "relatedSpdxElement": REQ})
+    comps = by_ref(to_model(data))
+    assert comps[APP].dependencies == (REQ,)
+    assert comps[IDNA].dependencies == ()
+
+
 def test_checksums_normalised_lowercase():
     data = load()
     data["packages"][0]["checksums"].append(

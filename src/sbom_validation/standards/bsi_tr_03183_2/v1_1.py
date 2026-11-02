@@ -218,7 +218,8 @@ RULES: tuple[Rule, ...] = (
         "5.2.2",
         "recorded direct dependencies: dependencies[*] entry for the "
         "component's bom-ref (CycloneDX) or DEPENDS_ON/DEPENDENCY_OF "
-        "relationships (SPDX), every component; completeness is not "
+        "relationships (SPDX: judged document-wide), every component; "
+        "completeness is not "
         "verifiable and needs manual review",
         lambda c: c.dependencies is not None,
         "no dependency data recorded for this component",

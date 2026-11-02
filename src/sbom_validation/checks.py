@@ -95,7 +95,7 @@ def is_email(s: str) -> bool:
         return False
 
 
-# @need-ids: REQ_BSI11_CMP_CREATOR, REQ_BSI11_SRC_URI, REQ_BSI11_EXE_URI
+# @need-ids: REQ_BSI11_CMP_CREATOR, REQ_BSI11_SBOM_CREATOR
 def is_url(s: str) -> bool:
     """http/https/ftp URL with a non-empty host."""
     try:
@@ -109,7 +109,7 @@ def is_url(s: str) -> bool:
         return False
 
 
-# @need-ids: REQ_BSI11_SBOM_URI
+# @need-ids: REQ_BSI11_SBOM_URI, REQ_BSI11_SRC_URI, REQ_BSI11_EXE_URI
 def is_uri(s: str) -> bool:
     """RFC 3986 absolute URI with a scheme (``urn:uuid:...``, ``https://...``)."""
     try:

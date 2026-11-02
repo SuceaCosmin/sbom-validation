@@ -129,10 +129,11 @@ def _relationships(data: dict) -> tuple[set[str], dict[str, dict[str, None]] | N
         elif kind == "DESCRIBED_BY" and target == _DOCUMENT:
             describes.add(source)
         elif kind in ("DEPENDS_ON", "DEPENDENCY_OF"):
-            has_dependency_data = True
             dependent, dependency = (source, target) if kind == "DEPENDS_ON" else (target, source)
+            # NONE/NOASSERTION endpoints are not a statement of dependencies.
             if dependency in _NO_VALUE or dependent in _NO_VALUE:
                 continue
+            has_dependency_data = True
             deps.setdefault(dependent, {})[dependency] = None
     return describes, deps if has_dependency_data else None
 
