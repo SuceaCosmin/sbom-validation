@@ -1,0 +1,60 @@
+#:schema https://ubcode.useblocks.com/ubproject.schema.json
+
+[needs]
+id_required = true
+id_regex = "^[A-Z0-9_]{5,}$"
+
+[[needs.types]]
+directive = "req"
+title = "Requirement"
+prefix = "REQ_"
+color = "#BFD8D2"
+style = "node"
+
+[[needs.types]]
+directive = "spec"
+title = "Specification"
+prefix = "SPEC_"
+color = "#FEDCD2"
+style = "node"
+
+[[needs.types]]
+directive = "impl"
+title = "Implementation"
+prefix = "IMPL_"
+color = "#DF744A"
+style = "node"
+
+[[needs.types]]
+directive = "test"
+title = "Test Case"
+prefix = "TEST_"
+color = "#DCB239"
+style = "node"
+
+[needs.links.references]
+incoming = "is referenced by"
+outgoing = "references"
+
+[needs.links.derived_from]
+incoming = "is derived from"
+outgoing = "derives"
+
+[needs.links.implements]
+incoming = "is implemented by"
+outgoing = "implements"
+
+[needs.links.verifies]
+incoming = "is verified by"
+outgoing = "verifies"
+
+[codelinks]
+set_local_url = true
+
+[codelinks.projects.sbom_validation.source_discover]
+src_dir = "src"
+comment_type = "python"
+
+[codelinks.projects.sbom_validation.analyse]
+get_oneline_needs = true
+get_need_id_refs = true
