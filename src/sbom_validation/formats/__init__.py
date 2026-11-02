@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from sbom_validation.errors import InputProblem
+from sbom_validation.errors import NESTING_MESSAGE, InputProblem
 from sbom_validation.formats import cyclonedx, spdx2
 from sbom_validation.formats.detect import CYCLONEDX, FormatInfo, detect_format
 from sbom_validation.formats.schemas import validate_schema
@@ -31,6 +31,8 @@ def read_json(path: Path) -> dict:
         raise InputProblem(f"File not found: {path}") from None
     except json.JSONDecodeError as exc:
         raise InputProblem(f"Invalid JSON in {path}: {exc}") from None
+    except RecursionError:
+        raise InputProblem(f"{path}: {NESTING_MESSAGE}") from None
     except UnicodeDecodeError as exc:
         raise InputProblem(f"{path} is not valid UTF-8 text: {exc}") from None
     except OSError as exc:
@@ -42,9 +44,12 @@ def read_json(path: Path) -> dict:
 
 def to_sbom(data: dict, info: FormatInfo) -> Sbom:
     """Convert a parsed document of the detected format to the neutral model."""
-    if info.format == CYCLONEDX:
-        return cyclonedx.to_model(data)
-    return spdx2.to_model(data)
+    try:
+        if info.format == CYCLONEDX:
+            return cyclonedx.to_model(data)
+        return spdx2.to_model(data)
+    except RecursionError:
+        raise InputProblem(NESTING_MESSAGE) from None
 
 
 def load_sbom(path: Path) -> tuple[Sbom, FormatInfo]:

@@ -14,12 +14,13 @@ from jsonschema.validators import extend
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT7
 
-from sbom_validation.errors import InputProblem, UnsupportedFormat
+from sbom_validation.errors import NESTING_MESSAGE, InputProblem, UnsupportedFormat
 from sbom_validation.formats.detect import CYCLONEDX, SPDX, FormatInfo
 
 # @need-ids: REQ_OFFLINE_001, REQ_BSI11_FORMATS
 
 MAX_ERRORS = 50
+MAX_MESSAGE = 300
 
 _SCHEMA_FILES = {
     (CYCLONEDX, "1.4"): "bom-1.4.schema.json",
@@ -74,13 +75,15 @@ def _unique_items(validator, unique, instance, schema):
     which makes SBOMs with tens of thousands of components take minutes."""
     if not unique or not validator.is_type(instance, "array"):
         return
-    seen = set()
-    for item in instance:
+    seen: dict[str, int] = {}
+    for index, item in enumerate(instance):
         key = _canonical(item)
         if key in seen:
-            yield ValidationError(f"{instance!r} has non-unique elements")
+            yield ValidationError(
+                f"has non-unique elements: items {seen[key]} and {index} are identical"
+            )
             return
-        seen.add(key)
+        seen[key] = index
 
 
 _Validator = extend(Draft7Validator, {"uniqueItems": _unique_items})
@@ -97,6 +100,15 @@ def _path(error) -> str:
     return "/" + parts if parts else "/"
 
 
+def _message(error) -> str:
+    """The error message, cut to ``MAX_MESSAGE`` characters (jsonschema repr's
+    the whole offending instance, which can be megabytes)."""
+    text = error.message
+    if len(text) > MAX_MESSAGE:
+        return text[:MAX_MESSAGE] + "... [truncated]"
+    return text
+
+
 def validate_schema(data: dict, info: FormatInfo) -> None:
     """Validate ``data`` against the bundled schema for ``info``.
 
@@ -109,17 +121,20 @@ def validate_schema(data: dict, info: FormatInfo) -> None:
             f"No bundled schema for {info.format} {info.version}; "
             "schema validation is not available for this version."
         )
-    errors = sorted(
-        _validator(key).iter_errors(data),
-        key=lambda e: (_path(e), e.message),
-    )
+    try:
+        errors = sorted(
+            _validator(key).iter_errors(data),
+            key=lambda e: (_path(e), _message(e)),
+        )
+    except RecursionError:
+        raise InputProblem(NESTING_MESSAGE) from None
     if not errors:
         return
     lines = [
         f"{info.format} {info.version} schema validation failed "
         f"({len(errors)} error{'s' if len(errors) != 1 else ''}):"
     ]
-    lines += [f"  {_path(e)}: {e.message}" for e in errors[:MAX_ERRORS]]
+    lines += [f"  {_path(e)}: {_message(e)}" for e in errors[:MAX_ERRORS]]
     if len(errors) > MAX_ERRORS:
         lines.append(f"  ... and {len(errors) - MAX_ERRORS} more")
     raise InputProblem("\n".join(lines))

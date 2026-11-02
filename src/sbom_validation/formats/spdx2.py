@@ -13,7 +13,7 @@ from sbom_validation.model import Component, Party, Sbom
 _DOCUMENT = "SPDXRef-DOCUMENT"
 _VCS_PREFIXES = ("git+", "hg+", "svn+", "bzr+")
 _NO_VALUE = ("NONE", "NOASSERTION")
-_ACTOR = re.compile(r"^(Person|Organization):\s*(.*?)\s*(?:\(([^()]*)\))?\s*$", re.DOTALL)
+_ACTOR_PREFIXES = ("Person:", "Organization:")
 _URL = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://\S+$")
 _SHA_ALG = re.compile(r"^SHA(\d+)$")
 
@@ -21,11 +21,17 @@ _SHA_ALG = re.compile(r"^SHA(\d+)$")
 def _actor(value: Any) -> Party | None:
     """Party from ``Person: name (email)`` / ``Organization: name (email)``."""
     text = _str(value)
-    match = _ACTOR.match(text) if text else None
-    if not match:
+    if not text or not text.startswith(_ACTOR_PREFIXES):
         return None
-    name = match.group(2) or None
-    contact = (match.group(3) or "").strip()
+    # Linear parsing (a backtracking regex here is quadratic on long input).
+    rest = text.split(":", 1)[1].strip()
+    contact = ""
+    if rest.endswith(")"):
+        open_at = rest.rfind("(")
+        if open_at != -1 and ")" not in rest[open_at + 1 : -1]:
+            contact = rest[open_at + 1 : -1].strip()
+            rest = rest[:open_at].rstrip()
+    name = rest or None
     email = contact if "@" in contact and not _URL.match(contact) else None
     url = contact if _URL.match(contact) else None
     if not (name or email or url):

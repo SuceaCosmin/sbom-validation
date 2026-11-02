@@ -10,7 +10,12 @@ from typing import Any
 from sbom_validation.formats._tolerant import _dicts, _str, _strs
 from sbom_validation.model import Component, Party, Sbom
 
-_EMAIL = re.compile(r"[^\s<>()@,;]+@[^\s<>()@,;]+\.[^\s<>()@,;]+")
+# Matches start only at a token boundary (after whitespace, a delimiter or the
+# start), and the domain is dot-separated labels, so matching is linear in the
+# text length and a trailing dot is never part of the address.
+_EMAIL = re.compile(
+    r"(?<![^\s<>()@,;])[^\s<>()@,;]+@[^\s<>()@,;.]+(?:\.[^\s<>()@,;.]+)+"
+)
 
 
 def _free_text_party(value: Any) -> list[Party]:
