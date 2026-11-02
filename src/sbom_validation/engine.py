@@ -7,11 +7,8 @@ from sbom_validation.formats import detect_format, read_json, to_sbom, validate_
 from sbom_validation.formats.detect import FormatInfo
 from sbom_validation.results import Report, RequirementResult, Status
 from sbom_validation.standards import get_rule_set
-from sbom_validation.standards.bsi_tr_03183_2.v1_1 import formats_failed_row
 
 # @need-ids: REQ_OFFLINE_001, REQ_BSI11_FORMATS
-
-_FORMATS_ID = "REQ_BSI11_FORMATS"
 
 
 def run(path: Path, standard: str, version: str) -> Report:
@@ -40,11 +37,12 @@ def run(path: Path, standard: str, version: str) -> Report:
         return report(None, problem=str(exc))
 
     if not rule_set.accepts(info):
+        rejected = rule_set.rejected_format_row(info)
         return report(
             info,
             (
-                formats_failed_row(info)
-                if rule.id == _FORMATS_ID
+                rejected
+                if rule.id == rejected.id
                 else RequirementResult(
                     rule.id,
                     rule.title,
@@ -58,7 +56,7 @@ def run(path: Path, standard: str, version: str) -> Report:
 
     try:
         validate_schema(data, info)
+        sbom = to_sbom(data, info)
     except InputProblem as exc:
         return report(info, problem=str(exc))
-    sbom = to_sbom(data, info)
     return report(info, (rule.evaluate(sbom) for rule in rule_set.rules))

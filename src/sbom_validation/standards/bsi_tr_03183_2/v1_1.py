@@ -323,4 +323,10 @@ RULES: tuple[Rule, ...] = (
     ),
 )
 
-RULE_SET = RuleSet(standard=STANDARD, version=VERSION, accepts=accepts, rules=RULES)
+RULE_SET = RuleSet(
+    standard=STANDARD,
+    version=VERSION,
+    accepts=accepts,
+    rejected_format_row=formats_failed_row,
+    rules=RULES,
+)

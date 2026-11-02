@@ -46,4 +46,9 @@ class RuleSet:
     standard: str
     version: str
     accepts: Callable[[FormatInfo], bool]
+    rejected_format_row: Callable[[FormatInfo], RequirementResult]
+    """The FAILED row of the formats rule for a format ``accepts`` rejected.
+
+    The engine then reports every other rule as NOT_EVALUATED; the formats
+    rule is the one whose id equals this row's id."""
     rules: tuple[Rule, ...]
