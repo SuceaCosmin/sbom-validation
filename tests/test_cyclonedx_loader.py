@@ -32,7 +32,7 @@ def test_maps_primary_and_nested_components():
     assert primary.is_primary
     assert [c.is_primary for c in sbom.components].count(True) == 1
     assert primary.name == "acme-app" and primary.version == "1.0.0"
-    assert primary.creators == (Party("Acme Dev", "dev@example.com", None),)
+    assert primary.creators == (Party("Acme Dev <dev@example.com>", "dev@example.com", None),)
     assert primary.licenses == ("Apache-2.0",)
     assert primary.identifiers == ("pkg:generic/acme-app@1.0.0",)
     nested = comps["pkg:pypi/urllib3@2.0.7"]
@@ -48,7 +48,12 @@ def test_maps_primary_and_nested_components():
     assert req.creators == (
         Party("Maintainers", "maintainers@example.org", "https://pypi.org/project/requests/"),
     )
-    assert comps["pkg:pypi/idna@3.4"].dependencies is None
+    assert comps["pkg:pypi/idna@3.4"].dependencies == ()
+    data = load()
+    data["dependencies"] = [
+        d for d in data["dependencies"] if d["ref"] != "pkg:pypi/idna@3.4"
+    ]
+    assert by_ref(to_model(data))["pkg:pypi/idna@3.4"].dependencies is None
 
 
 def test_hash_is_normalised_lowercase():
