@@ -54,6 +54,8 @@ _LICENSE_REF_RE = re.compile(
 _LOWERCASE_OPERATOR_RE = re.compile(r"(?<![^\s()])(?:and|or|with)(?![^\s()])")
 
 _SPDX_PLACEHOLDER = "MIT"
+_TOKEN_SPLIT_RE = re.compile(r"[\s()]+")
+_OPERATORS = frozenset({"AND", "OR", "WITH"})
 
 
 def is_sha256(s: str) -> bool:
@@ -142,13 +144,34 @@ def _licensing():
     return get_spdx_licensing()
 
 
+@lru_cache(maxsize=1)
+def _canonical_keys() -> frozenset:
+    # Canonical keys plus the list's aliases, which carry the deprecated-but-
+    # listed SPDX ids (e.g. GPL-2.0, GPL-2.0+ handled via "+" stripping).
+    symbols = _licensing().known_symbols.values()
+    return frozenset(
+        {sym.key for sym in symbols}
+        | {alias for sym in symbols for alias in sym.aliases}
+    )
+
+
 @lru_cache(maxsize=8192)
 def _check_licence(s: str) -> bool:
     if not s.strip() or _LOWERCASE_OPERATOR_RE.search(s):
         return False
     substituted = _LICENSE_REF_RE.sub(_SPDX_PLACEHOLDER, s)
     result = _licensing().validate(substituted, validate_license_keys=True)
-    return not result.errors
+    if result.errors:
+        return False
+    # The library matches ids case-insensitively; BSI requires the canonical
+    # SPDX id (and canonical exception id after WITH).
+    canonical = _canonical_keys()
+    for token in _TOKEN_SPLIT_RE.split(substituted):
+        if not token or token in _OPERATORS:
+            continue
+        if token not in canonical and token.rstrip("+") not in canonical:
+            return False
+    return True
 
 
 # @need-ids: REQ_BSI11_CMP_LICENCE
