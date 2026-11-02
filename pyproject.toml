@@ -4,10 +4,14 @@ version = "0.1.0"
 description = "Standards-based SBOM validation"
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
-dependencies = []
+dependencies = ["jsonschema (>=4.26.0,<5.0.0)", "license-expression (>=30.4.4,<31.0.0)", "packageurl-python (>=0.17.6,<0.18.0)"]
+
+[project.scripts]
+sbom-validation = "sbom_validation.cli:main"
 
 [tool.poetry]
 packages = [{ include = "sbom_validation", from = "src" }]
+include = [{ path = "src/sbom_validation/formats/schemas/*.json", format = ["sdist", "wheel"] }]
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "^8.2"

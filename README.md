@@ -6,11 +6,14 @@ implementation, and tests are maintained with Sphinx and Sphinx-Needs.
 
 ## Initial scope
 
-- SBOM formats: CycloneDX and SPDX.
-- Initial standards reference: BSI TR-03183-2, Software Bill of Materials,
-  version 2.1.0.
-- Detailed format versions, serializations, and validation rules will be
-  specified as traceable requirements before implementation.
+- SBOM formats: CycloneDX (1.4 and higher) and SPDX 2.x (2.3 and higher) in
+  JSON. SPDX 3.x is not supported yet and will follow with the newer BSI
+  guideline version that requires it.
+- First standard: BSI TR-03183-2, Software Bill of Materials, version 1.1.
+  Later versions of the guideline will be added progressively.
+- Requirements are maintained as traceable needs; the draft mapping from each
+  BSI requirement to SBOM elements is in
+  [docs/mappings/bsi-tr-03183-2-v1.1.md](docs/mappings/bsi-tr-03183-2-v1.1.md).
 
 The current repository establishes the package and requirements-documentation
 foundation; validation behavior has not yet been implemented.
