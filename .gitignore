@@ -10,3 +10,5 @@ docs/_build/
 
 .superpowers/
 _build/
+
+build/
