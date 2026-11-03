@@ -19,6 +19,9 @@ sphinx-needs = "^9.1"
 sphinx-codelinks = "^2.0.1"
 furo = ">=2024.8"
 
+[tool.poetry.group.build.dependencies]
+pyinstaller = { version = ">=6.10,<7", python = ">=3.11,<3.15" }
+
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3"
 
