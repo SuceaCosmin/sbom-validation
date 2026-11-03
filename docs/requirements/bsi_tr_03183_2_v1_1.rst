@@ -1,0 +1,269 @@
+BSI TR-03183-2 version 1.1
+==========================
+
+Requirements derived from BSI TR-03183-2 version 1.1 (see
+:need:`SPEC_BSI_TR03183_2_V1_1`). Requirements are grouped by the section of the guideline they come from; the section is also a field on every requirement. The
+``level`` field is the obligation in the guideline (``MUST`` or
+``Conditional``); ``result_kind`` states what the validator reports. See
+:doc:`../reading-guide` for the meaning of every field value, and
+:doc:`../mappings/bsi-tr-03183-2-v1.1` for the SBOM elements examined per
+requirement.
+
+Section 3.1
+-----------
+
+.. req:: One SBOM per software version
+   :id: REQ_BSI11_ONE_PER_VERSION
+   :status: verified
+   :origin: standard
+   :section: 3.1
+   :level: MUST
+   :result_kind: not-verifiable
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S3_1
+
+   The validator shall report the requirement of BSI TR-03183-2 version 1.1 section 3.1 for a separate SBOM for each software version as not verifiable.
+
+Section 3.2
+-----------
+
+.. req:: Component is a single executable file
+   :id: REQ_BSI11_COMPONENT_EXEC
+   :status: verified
+   :origin: standard
+   :section: 3.2
+   :level: MUST
+   :result_kind: not-verifiable
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S3_2
+
+   The validator shall report the requirement of BSI TR-03183-2 version 1.1 section 3.2 that a component corresponds to a single executable file as not verifiable.
+
+Section 4
+---------
+
+.. req:: SBOM format and version
+   :id: REQ_BSI11_FORMATS
+   :status: verified
+   :origin: standard
+   :section: 4
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S4
+
+   The validator shall report an SBOM that is not CycloneDX 1.4 or higher, or SPDX 2.3 or higher, as failing the format requirement of BSI TR-03183-2 version 1.1 section 4.
+
+Section 5.1
+-----------
+
+.. req:: Recursive dependency resolution
+   :id: REQ_BSI11_DEPTH
+   :status: verified
+   :origin: standard
+   :section: 5.1
+   :level: MUST
+   :result_kind: not-verifiable
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_1
+
+   The validator shall report the recursive dependency resolution required by BSI TR-03183-2 version 1.1 section 5.1 as not verifiable.
+
+.. req:: SBOM created in the build process
+   :id: REQ_BSI11_BUILD
+   :status: verified
+   :origin: standard
+   :section: 5.1
+   :level: MUST
+   :result_kind: not-verifiable
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_1
+
+   The validator shall report the creation of the SBOM as part of the build process, required by BSI TR-03183-2 version 1.1 section 5.1, as not verifiable.
+
+Section 5.2.1
+-------------
+
+.. req:: SBOM creator
+   :id: REQ_BSI11_SBOM_CREATOR
+   :status: verified
+   :origin: standard
+   :section: 5.2.1
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_1
+
+   The validator shall report an SBOM that lacks a creator given as an email address, or as a URL where no email address is available, as failing BSI TR-03183-2 version 1.1 section 5.2.1.
+
+.. req:: SBOM timestamp
+   :id: REQ_BSI11_TIMESTAMP
+   :status: verified
+   :origin: standard
+   :section: 5.2.1
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_1
+
+   The validator shall report an SBOM that lacks a timestamp in the form the SBOM format specifies as failing BSI TR-03183-2 version 1.1 section 5.2.1.
+
+Section 5.2.2
+-------------
+
+.. req:: Component creator
+   :id: REQ_BSI11_CMP_CREATOR
+   :status: verified
+   :origin: standard
+   :section: 5.2.2
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_2
+
+   The validator shall report each component that lacks a creator given as an email address, or as a URL where no email address is available, as failing BSI TR-03183-2 version 1.1 section 5.2.2.
+
+.. req:: Component name
+   :id: REQ_BSI11_CMP_NAME
+   :status: verified
+   :origin: standard
+   :section: 5.2.2
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_2
+
+   The validator shall report each component that lacks a name as failing BSI TR-03183-2 version 1.1 section 5.2.2.
+
+.. req:: Component version
+   :id: REQ_BSI11_CMP_VERSION
+   :status: verified
+   :origin: standard
+   :section: 5.2.2
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_2
+
+   The validator shall report each component that lacks a version as failing BSI TR-03183-2 version 1.1 section 5.2.2 and shall not report the use of Semantic or Calendar Versioning.
+
+.. req:: Component dependencies
+   :id: REQ_BSI11_CMP_DEPS
+   :status: verified
+   :origin: standard
+   :section: 5.2.2
+   :level: MUST
+   :result_kind: pass-fail-partly-not-verifiable
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_2
+
+   The validator shall evaluate the dependency relationships recorded for each component under BSI TR-03183-2 version 1.1 section 5.2.2 and shall report their completeness as not verifiable.
+
+.. req:: Component licence
+   :id: REQ_BSI11_CMP_LICENCE
+   :status: verified
+   :origin: standard
+   :section: 5.2.2
+   :level: MUST
+   :result_kind: pass-fail-partly-not-verifiable
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_2
+
+   The validator shall report each component whose licence is not an SPDX licence identifier or expression, a LicenseRef-scancode- identifier or a LicenseRef-<entity>- identifier as failing BSI TR-03183-2 version 1.1 section 5.2.2, and shall report the correctness of the licence as not verifiable.
+
+.. req:: Hash of the executable component
+   :id: REQ_BSI11_CMP_HASH
+   :status: verified
+   :origin: standard
+   :section: 5.2.2
+   :level: MUST
+   :result_kind: pass-fail
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_2_2
+
+   The validator shall report each component that lacks a SHA-256 hash of its executable form as failing BSI TR-03183-2 version 1.1 section 5.2.2.
+
+Section 5.3.1
+-------------
+
+.. req:: SBOM URI
+   :id: REQ_BSI11_SBOM_URI
+   :status: verified
+   :origin: standard
+   :section: 5.3.1
+   :level: Conditional
+   :result_kind: form-only
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_3_1
+
+   The validator shall check the form of the SBOM URI, when present, against BSI TR-03183-2 version 1.1 section 5.3.1 and shall not report its absence.
+
+Section 5.3.2
+-------------
+
+.. req:: Source code URI
+   :id: REQ_BSI11_SRC_URI
+   :status: verified
+   :origin: standard
+   :section: 5.3.2
+   :level: Conditional
+   :result_kind: form-only
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_3_2
+
+   The validator shall check the form of the source code URI of each component, when present, against BSI TR-03183-2 version 1.1 section 5.3.2 and shall not report its absence.
+
+.. req:: URI of the executable form
+   :id: REQ_BSI11_EXE_URI
+   :status: verified
+   :origin: standard
+   :section: 5.3.2
+   :level: Conditional
+   :result_kind: form-only
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_3_2
+
+   The validator shall check the form of the URI of the executable form of each component, when present, against BSI TR-03183-2 version 1.1 section 5.3.2 and shall not report its absence.
+
+.. req:: SHA-256 of the source code
+   :id: REQ_BSI11_SRC_HASH
+   :status: verified
+   :origin: standard
+   :section: 5.3.2
+   :level: Conditional
+   :result_kind: form-only
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_3_2
+
+   The validator shall check the form of the SHA-256 hash of the source code of each component, when present, against BSI TR-03183-2 version 1.1 section 5.3.2 and shall not report its absence.
+
+.. req:: Other unique identifiers
+   :id: REQ_BSI11_OTHER_IDS
+   :status: verified
+   :origin: standard
+   :section: 5.3.2
+   :level: Conditional
+   :result_kind: form-only
+   :release: 0.1.0
+   :tags: bsi, bsi-1-1
+   :references: SPEC_BSI_TR03183_2_V1_1, SPEC_BSI11_S5_3_2
+
+   The validator shall check the form of the CPE and purl identifiers of each component, when present, against BSI TR-03183-2 version 1.1 section 5.3.2 and shall not report their absence.
+

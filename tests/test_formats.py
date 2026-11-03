@@ -28,6 +28,7 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+# @need-ids: REQ_FMT_001
 def test_detects_cyclonedx_and_spdx2():
     assert detect_format(load(CDX)) == FormatInfo("CycloneDX", "1.5")
     assert detect_format(load(SPDX)) == FormatInfo("SPDX", "2.3")
@@ -67,6 +68,7 @@ def test_utf8_bom_file_loads(tmp_path):
     assert sbom.spec_version == "1.5"
 
 
+# @need-ids: REQ_FMT_001
 def test_load_sbom_both_samples():
     sbom, info = load_sbom(SPDX)
     assert (info.format, info.version) == ("SPDX", "2.3")
@@ -130,6 +132,7 @@ def test_validate_schema_without_bundled_schema_is_unsupported():
         validate_schema({}, FormatInfo("SPDX", "2.2"))
 
 
+# @need-ids: REQ_OFFLINE_001
 @pytest.mark.parametrize("version", ["1.4", "1.5", "1.6", "1.7"])
 def test_all_bundled_cyclonedx_schemas_resolve(version):
     data = {"bomFormat": "CycloneDX", "specVersion": version, "version": 1}

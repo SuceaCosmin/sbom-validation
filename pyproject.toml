@@ -16,6 +16,8 @@ include = [{ path = "src/sbom_validation/formats/schemas/*.json", format = ["sdi
 [tool.poetry.group.docs.dependencies]
 sphinx = "^8.2"
 sphinx-needs = "^9.1"
+sphinx-codelinks = "^2.0.1"
+furo = ">=2024.8"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3"

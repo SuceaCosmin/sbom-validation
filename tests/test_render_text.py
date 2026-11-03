@@ -161,6 +161,7 @@ def test_json_is_utf8_safe():
     out.encode("utf-8")
 
 
+# @need-ids: REQ_REPORT_001
 def test_json_and_console_agree_on_counts(tmp_path):
     for report in _all_reports(tmp_path):
         if report.problem:

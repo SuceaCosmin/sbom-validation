@@ -67,6 +67,7 @@ def _scan(html: str) -> _Scan:
     return scan
 
 
+# @need-ids: REQ_OFFLINE_001
 def test_has_no_external_references():
     html = render_html(
         _report(
@@ -88,6 +89,7 @@ def test_has_no_external_references():
     assert 'name="viewport"' in html and 'charset="utf-8"' in html
 
 
+# @need-ids: REQ_REPORT_001
 def test_one_row_per_requirement():
     report = _mixed()
     scan = _scan(render_html(report))
@@ -123,6 +125,7 @@ def test_contains_sort_and_filter_controls():
     assert "<details" in html
 
 
+# @need-ids: REQ_REPORT_001
 def test_html_and_json_agree_on_counts():
     report = _mixed()
     counts = json.loads(render_json(report))["counts"]

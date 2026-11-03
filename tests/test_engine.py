@@ -27,6 +27,7 @@ def _cdx_1_3(tmp_path: Path) -> Path:
     return _write(tmp_path, data)
 
 
+# @need-ids: REQ_FMT_001
 @pytest.mark.parametrize("sample", [CDX_SAMPLE, SPDX_SAMPLE])
 def test_compliant_sample_has_no_failed_rows(sample):
     report = run(sample, STD, VER)

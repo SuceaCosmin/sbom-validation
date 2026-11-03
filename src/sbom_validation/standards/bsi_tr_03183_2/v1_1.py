@@ -1,7 +1,7 @@
 """BSI TR-03183-2 version 1.1 (English, 2023-11-28) as data.
 
-One rule per ``REQ_BSI11_*`` need in docs/requirements.rst, in that order.
-The element mapping is docs/mappings/bsi-tr-03183-2-v1.1.md; the format
+One rule per ``REQ_BSI11_*`` need in docs/requirements/bsi_tr_03183_2_v1_1.rst, in that order.
+The element mapping is docs/mappings/bsi-tr-03183-2-v1.1.rst; the format
 loaders apply it, so the rules here see only the neutral ``Sbom`` model.
 """
 

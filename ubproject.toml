@@ -1,5 +1,9 @@
 #:schema https://ubcode.useblocks.com/ubproject.schema.json
 
+# The documentation sources live in docs/ (Sphinx: docs/conf.py).
+[source]
+dir = "docs"
+
 [needs]
 id_required = true
 id_regex = "^[A-Z0-9_]{5,}$"
@@ -32,6 +36,55 @@ prefix = "TEST_"
 color = "#DCB239"
 style = "node"
 
+# Lifecycle: draft -> approved -> implemented -> verified (deprecated = retired).
+# Meaning of each value: docs/reading-guide.rst.
+# Per-status CSS class (needs_style_status_<status>; the status_ prefix avoids
+# sphinx-needs built-in colour styles such as needs_style_implemented = green) used by docs/_static/needs-theme.css.
+[needs.fields.style]
+default = "none"
+predicates = [
+  ["status == 'verified'", "status_verified"],
+  ["status == 'implemented'", "status_implemented"],
+  ["status == 'approved'", "status_approved"],
+  ["status == 'draft'", "status_draft"],
+  ["status == 'deprecated'", "status_deprecated"],
+]
+
+[needs.fields.status]
+description = "Requirement lifecycle state."
+schema = { type = "string", enum = ["draft", "approved", "implemented", "verified", "deprecated"] }
+
+[needs.fields.evidence]
+description = "Count of code and test markers (computed by docs/conf.py)."
+schema = { type = "string" }
+nullable = true
+default = "[[evidence_summary()]]"
+
+[needs.fields.level]
+description = "Obligation level in the source standard (MUST, Conditional) or n/a for product requirements."
+schema = { type = "string" }
+nullable = true
+
+[needs.fields.result_kind]
+description = "What the validator reports: pass-fail, form-only, or not-verifiable."
+schema = { type = "string" }
+nullable = true
+
+[needs.fields.origin]
+description = "Where the requirement comes from: standard (taken from a specification) or product (a product decision)."
+schema = { type = "string", enum = ["standard", "product"] }
+nullable = true
+
+[needs.fields.section]
+description = "Section of the source standard the requirement or clause belongs to, for example 5.2.2."
+schema = { type = "string" }
+nullable = true
+
+[needs.fields.release]
+description = "Release the requirement is planned for or shipped in, for example 0.1.0."
+schema = { type = "string" }
+nullable = true
+
 [needs.links.references]
 incoming = "is referenced by"
 outgoing = "references"
@@ -51,10 +104,24 @@ outgoing = "verifies"
 [codelinks]
 set_local_url = true
 
+[codelinks.projects.sbom_validation]
+# Production code: @need-ids markers fill each requirement's "code_url".
+ref_url_field = "code_url"
+
 [codelinks.projects.sbom_validation.source_discover]
 src_dir = "src"
 comment_type = "python"
 
 [codelinks.projects.sbom_validation.analyse]
-get_oneline_needs = true
+get_need_id_refs = true
+
+[codelinks.projects.sbom_validation_tests]
+# Tests: @need-ids markers fill each requirement's "test_url".
+ref_url_field = "test_url"
+
+[codelinks.projects.sbom_validation_tests.source_discover]
+src_dir = "tests"
+comment_type = "python"
+
+[codelinks.projects.sbom_validation_tests.analyse]
 get_need_id_refs = true

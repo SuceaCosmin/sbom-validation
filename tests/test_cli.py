@@ -30,16 +30,19 @@ def _gap(tmp_path: Path) -> Path:
     return _write(tmp_path, data, "gap.json")
 
 
+# @need-ids: REQ_CLI_001
 def test_compliant_returns_0(capsys):
     assert main([str(CDX_SAMPLE), *STD]) == ExitCode.OK
     assert capsys.readouterr().out.strip()
 
 
+# @need-ids: REQ_CLI_001
 def test_single_gap_returns_1(tmp_path, capsys):
     assert main([str(_gap(tmp_path)), *STD]) == ExitCode.NON_COMPLIANT
     assert "FAILED" in capsys.readouterr().out
 
 
+# @need-ids: REQ_CLI_001
 def test_schema_invalid_returns_2(tmp_path):
     path = _write(tmp_path, {"bomFormat": "CycloneDX", "specVersion": "1.5", "components": 3})
     assert main([str(path), *STD]) == ExitCode.INPUT_PROBLEM
@@ -49,6 +52,7 @@ def test_missing_file_returns_2(tmp_path):
     assert main([str(tmp_path / "nope.json"), *STD]) == ExitCode.INPUT_PROBLEM
 
 
+# @need-ids: REQ_CLI_001
 def test_unknown_version_returns_3_and_lists_supported(capsys):
     argv = [str(CDX_SAMPLE), "--standard", "bsi-tr-03183-2", "--standard-version", "9.9"]
     assert main(argv) == ExitCode.USAGE
@@ -90,6 +94,7 @@ def test_path_with_spaces_and_unicode(tmp_path, capsys):
     capsys.readouterr()
 
 
+# @need-ids: REQ_REPORT_001
 @pytest.mark.parametrize("sample", [CDX_SAMPLE, SPDX_SAMPLE])
 def test_all_three_outputs_in_one_run(tmp_path, capsys, sample):
     json_out, html_out = tmp_path / "r.json", tmp_path / "r.html"
@@ -120,6 +125,7 @@ def test_write_failure_keeps_console_summary(tmp_path, capsys):
     assert len(captured.err.strip().splitlines()) == 1
 
 
+# @need-ids: REQ_CLI_001
 def test_internal_error_returns_4(monkeypatch, capsys):
     def boom(*_args):
         raise RuntimeError("kaboom")
@@ -130,6 +136,7 @@ def test_internal_error_returns_4(monkeypatch, capsys):
     assert err.strip() == "internal error: RuntimeError: kaboom"
 
 
+# @need-ids: REQ_OFFLINE_001
 def test_no_network(monkeypatch, tmp_path, capsys):
     def no_socket(*_args, **_kwargs):
         raise AssertionError("network access attempted")
@@ -141,6 +148,7 @@ def test_no_network(monkeypatch, tmp_path, capsys):
     capsys.readouterr()
 
 
+# @need-ids: REQ_CLI_001
 def test_bad_arguments_return_3_not_2(capsys):
     assert main([]) == ExitCode.USAGE
     assert main([str(CDX_SAMPLE)]) == ExitCode.USAGE

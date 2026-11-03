@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 from sbom_validation.errors import InputProblem, UnsupportedFormat
 
-# @need-ids: REQ_BSI11_FORMATS
+# @need-ids: REQ_BSI11_FORMATS, REQ_FMT_001
 
 CYCLONEDX = "CycloneDX"
 SPDX = "SPDX"

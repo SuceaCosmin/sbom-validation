@@ -31,7 +31,7 @@ from sbom_validation.standards.base import Rule, RuleSet
 from sbom_validation.standards.bsi_tr_03183_2 import v1_1
 from sbom_validation.standards.bsi_tr_03183_2.v1_1 import RULE_SET, formats_failed_row
 
-REQUIREMENTS = Path(__file__).parents[1] / "docs" / "requirements.rst"
+REQUIREMENTS = Path(__file__).parents[1] / "docs" / "requirements" / "bsi_tr_03183_2_v1_1.rst"
 
 NOT_VERIFIABLE = {
     "REQ_BSI11_DEPTH",
@@ -236,141 +236,169 @@ def test_compliant_samples_have_no_failed_rows(fmt):
 # --- One pair per machine-checkable rule ----------------------------------
 
 
+# @need-ids: REQ_BSI11_FORMATS
 @parametrize_formats
 def test_formats_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_FORMATS", fmt)
 
 
+# @need-ids: REQ_BSI11_FORMATS
 @parametrize_formats
 def test_formats_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_FORMATS", fmt)
 
 
+# @need-ids: REQ_BSI11_SBOM_CREATOR
 @parametrize_formats
 def test_sbom_creator_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_SBOM_CREATOR", fmt)
 
 
+# @need-ids: REQ_BSI11_SBOM_CREATOR
 @parametrize_formats
 def test_sbom_creator_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_SBOM_CREATOR", fmt)
 
 
+# @need-ids: REQ_BSI11_TIMESTAMP
 @parametrize_formats
 def test_timestamp_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_TIMESTAMP", fmt)
 
 
+# @need-ids: REQ_BSI11_TIMESTAMP
 @parametrize_formats
 def test_timestamp_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_TIMESTAMP", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_CREATOR
 @parametrize_formats
 def test_cmp_creator_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_CMP_CREATOR", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_CREATOR
 @parametrize_formats
 def test_cmp_creator_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_CMP_CREATOR", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_NAME
 @parametrize_formats
 def test_cmp_name_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_CMP_NAME", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_NAME
 @parametrize_formats
 def test_cmp_name_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_CMP_NAME", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_VERSION
 @parametrize_formats
 def test_cmp_version_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_CMP_VERSION", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_VERSION
 @parametrize_formats
 def test_cmp_version_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_CMP_VERSION", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_DEPS
 @parametrize_formats
 def test_cmp_deps_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_CMP_DEPS", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_DEPS
 @parametrize_formats
 def test_cmp_deps_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_CMP_DEPS", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_LICENCE
 @parametrize_formats
 def test_cmp_licence_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_CMP_LICENCE", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_LICENCE
 @parametrize_formats
 def test_cmp_licence_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_CMP_LICENCE", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_HASH
 @parametrize_formats
 def test_cmp_hash_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_CMP_HASH", fmt)
 
 
+# @need-ids: REQ_BSI11_CMP_HASH
 @parametrize_formats
 def test_cmp_hash_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_CMP_HASH", fmt)
 
 
+# @need-ids: REQ_BSI11_SBOM_URI
 @parametrize_formats
 def test_sbom_uri_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_SBOM_URI", fmt)
 
 
+# @need-ids: REQ_BSI11_SBOM_URI
 @parametrize_formats
 def test_sbom_uri_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_SBOM_URI", fmt)
 
 
+# @need-ids: REQ_BSI11_SRC_URI
 @parametrize_formats
 def test_src_uri_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_SRC_URI", fmt)
 
 
+# @need-ids: REQ_BSI11_SRC_URI
 @parametrize_formats
 def test_src_uri_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_SRC_URI", fmt)
 
 
+# @need-ids: REQ_BSI11_EXE_URI
 @parametrize_formats
 def test_exe_uri_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_EXE_URI", fmt)
 
 
+# @need-ids: REQ_BSI11_EXE_URI
 @parametrize_formats
 def test_exe_uri_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_EXE_URI", fmt)
 
 
+# @need-ids: REQ_BSI11_SRC_HASH
 @parametrize_formats
 def test_src_hash_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_SRC_HASH", fmt)
 
 
+# @need-ids: REQ_BSI11_SRC_HASH
 @parametrize_formats
 def test_src_hash_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_SRC_HASH", fmt)
 
 
+# @need-ids: REQ_BSI11_OTHER_IDS
 @parametrize_formats
 def test_other_ids_passes_on_compliant(fmt):
     _assert_passes_on_compliant("REQ_BSI11_OTHER_IDS", fmt)
 
 
+# @need-ids: REQ_BSI11_OTHER_IDS
 @parametrize_formats
 def test_other_ids_fails_on_single_gap(fmt):
     _assert_fails_on_single_gap("REQ_BSI11_OTHER_IDS", fmt)
@@ -469,6 +497,7 @@ def test_conditional_rules_pass_when_absent(fmt):
         assert results[rule_id].findings == ()
 
 
+# @need-ids: REQ_BSI11_SBOM_URI
 @parametrize_formats
 def test_sbom_uri_absent_in_document_passes(fmt):
     sbom = cdx(at(("serialNumber",))) if fmt == CDX else spdx(at(("documentNamespace",)))
@@ -512,6 +541,7 @@ def _point_dependencies_at_no_value(data: dict) -> None:
         rel[end] = ("NONE", "NOASSERTION")[i % 2]
 
 
+# @need-ids: REQ_BSI11_CMP_DEPS
 def test_cmp_deps_fails_when_only_no_value_endpoints():
     result = evaluate(spdx(_point_dependencies_at_no_value))["REQ_BSI11_CMP_DEPS"]
     assert result.status is Status.FAILED
@@ -551,6 +581,7 @@ def test_malformed_hash_fails():
     assert [f.component_ref for f in result.findings] == [IDNA[CDX]]
 
 
+# @need-ids: REQ_BSI11_TIMESTAMP
 @parametrize_formats
 def test_timestamp_fails_when_malformed(fmt):
     sbom = replace(load(fmt), timestamp="2026-11-02")
@@ -564,6 +595,7 @@ def test_empty_name_fails():
     assert evaluate(sbom)["REQ_BSI11_CMP_NAME"].status is Status.FAILED
 
 
+# @need-ids: REQ_BSI11_FORMATS
 def test_unsupported_version_is_a_failed_formats_row():
     info = FormatInfo("CycloneDX", "1.3")
     assert RULE_SET.accepts(info) is False
@@ -631,6 +663,7 @@ def _not_verifiable_samples():
             yield build()
 
 
+# @need-ids: REQ_BSI11_DEPTH, REQ_BSI11_BUILD, REQ_BSI11_ONE_PER_VERSION, REQ_BSI11_COMPONENT_EXEC
 def test_not_verifiable_rules_never_fail():
     rules = [r for r in RULE_SET.rules if r.id in NOT_VERIFIABLE]
     assert {r.id for r in rules} == NOT_VERIFIABLE
@@ -646,19 +679,23 @@ def test_not_verifiable_rules_never_fail():
 # --- Traceability and framework ------------------------------------------
 
 _REQ_BLOCK = re.compile(
-    r"^\.\. req:: BSI 1\.1 section ([\d.]+): (.+)\n   :id: (REQ_BSI11_\w+)$", re.M
+    r"^\.\. req:: (.+)\n   :id: (REQ_BSI11_\w+)\n(?:   :.+\n)*?   :section: ([\d.]+)$",
+    re.M,
 )
 
 
+# @need-ids: REQ_TRACE_001
 def test_rules_trace_to_requirements():
     needs = {
         rid: (section, title)
-        for section, title, rid in _REQ_BLOCK.findall(
+        for title, rid, section in _REQ_BLOCK.findall(
             REQUIREMENTS.read_text(encoding="utf-8")
         )
     }
     assert len(needs) == 18
-    assert [r.id for r in RULE_SET.rules] == list(needs)
+    # The docs group requirements by section, so compare membership, not order.
+    assert {r.id for r in RULE_SET.rules} == set(needs)
+    assert len(RULE_SET.rules) == len(needs)
     for rule in RULE_SET.rules:
         assert (rule.section, rule.title) == needs[rule.id]
 

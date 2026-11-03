@@ -19,7 +19,7 @@ Sphinx-Needs.
 - Requirements that cannot be decided from the SBOM alone are reported as
   "not verifiable" for manual review; they never change the exit code.
 - The draft mapping from each BSI requirement to SBOM elements is in
-  [docs/mappings/bsi-tr-03183-2-v1.1.md](docs/mappings/bsi-tr-03183-2-v1.1.md).
+  [docs/mappings/bsi-tr-03183-2-v1.1.rst](docs/mappings/bsi-tr-03183-2-v1.1.rst).
 
 The checked-in `ubproject.toml` configures matching Sphinx-Needs artifacts
 and ubCode Codelinks for source-level traceability.
@@ -67,5 +67,5 @@ poetry run pytest
 poetry run sphinx-build -W -b html docs docs/_build/html
 ```
 
-See [docs/requirements.rst](docs/requirements.rst) for the initial requirements
-and standards references.
+See [docs/index.rst](docs/index.rst) for the requirements, standards references
+and the traceability matrix (build them with the command above).

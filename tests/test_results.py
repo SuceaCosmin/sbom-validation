@@ -26,6 +26,7 @@ def _report(*statuses: Status, problem: str | None = None) -> Report:
     )
 
 
+# @need-ids: REQ_CLI_001
 def test_not_verifiable_never_changes_exit_code() -> None:
     report = _report(Status.PASSED, Status.NOT_VERIFIABLE, Status.NOT_EVALUATED)
     assert exit_code_for(report) == ExitCode.OK

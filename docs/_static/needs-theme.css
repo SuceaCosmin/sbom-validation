@@ -1,0 +1,206 @@
+/* Make Sphinx-Needs follow the Furo light/dark theme.
+ *
+ * Sphinx-Needs colours everything through --sn-color-* variables with light
+ * defaults. Mapping them onto Furo's --color-* variables, which Furo switches
+ * for dark mode, keeps cards, tables and popovers readable in both themes.
+ */
+body {
+  --sn-color-need-bg: var(--color-background-secondary);
+  --sn-color-need-bg-head: var(--color-background-hover);
+  --sn-color-need-border: var(--color-background-border);
+  --sn-color-need-row-border: var(--color-background-border);
+  --sn-color-bg-gray: var(--color-background-secondary);
+  --sn-color-bg-lightgray: var(--color-background-secondary);
+  --sn-color-border-lightgray: var(--color-background-border);
+  --sn-color-complete-bg-head: var(--color-background-hover);
+  --sn-color-complete-bg-foot: var(--color-background-hover);
+  --sn-color-table-label: var(--color-foreground-muted);
+  --sn-color-table-btn-border: var(--color-background-border);
+  --sn-color-table-popover-bg: var(--color-background-primary);
+  --sn-color-table-popover-fg: var(--color-foreground-primary);
+  --sn-color-forbidden-dead-link: var(--color-problematic);
+
+  --req-accent: #1f7a6e;
+  --spec-accent: #a85a28;
+  --need-ok: #1b7a43;
+  --need-warn: #7a5200;
+  --need-bad: #b02a2a;
+}
+body[data-theme="dark"] {
+  --req-accent: #5fc4b5;
+  --spec-accent: #e69a63;
+  --need-ok: #52c783;
+  --need-warn: #e5b341;
+  --need-bad: #ef7a7a;
+}
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    --req-accent: #5fc4b5;
+    --spec-accent: #e69a63;
+    --need-ok: #52c783;
+    --need-warn: #e5b341;
+    --need-bad: #ef7a7a;
+  }
+}
+
+/* Wider reading area: requirement cards and the matrix need the room. */
+.main { min-width: 0; }
+.content { width: 100%; max-width: 74em; min-width: 0; }
+article { max-width: none; min-width: 0; }
+
+/* "style" only carries the status CSS class below; do not show it as metadata */
+table.need .needs_style, table.need .needs_evidence { display: none; }
+
+/* Need cards */
+table.need {
+  width: 100%;
+  border: 1px solid var(--color-background-border);
+  border-left: 4px solid var(--color-brand-primary);
+  border-radius: 4px;
+  background: var(--color-background-secondary);
+  color: var(--color-foreground-primary);
+  margin: 1.2rem 0;
+}
+table.need.needs_type_req  { border-left-color: var(--req-accent); }
+table.need.needs_type_spec { border-left-color: var(--spec-accent); }
+table.need td, table.need tr { color: var(--color-foreground-primary); }
+table.need td.head { background: var(--color-background-secondary); border-bottom: 1px solid var(--color-background-border); }
+table.need { background: var(--color-background-primary); }
+table.need .needs_title { color: var(--color-foreground-primary); }
+table.need .needs_type_name .needs_data {
+  color: var(--color-foreground-secondary);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+table.need .needs-id a { font-family: var(--font-stack--monospace); font-size: 0.85em; }
+table.need svg { color: var(--color-foreground-muted); }
+
+/* Metadata: compact wrapped chips instead of one long list */
+table.need .needs_meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; }
+table.need .needs_meta > .line,
+table.need .needs_meta > .line > span > span > .line { display: block; }
+table.need .needs_label { color: var(--color-foreground-secondary); font-size: 0.8em; }
+table.need .needs_data { font-size: 0.85em; }
+
+/* Long evidence link lists: small, wrapped, one link per line */
+table.need .needs_code_url .needs_data_container,
+table.need .needs_test_url .needs_data_container {
+  display: inline-flex; flex-direction: column;
+}
+table.need .needs_code_url .needs_spacer,
+table.need .needs_test_url .needs_spacer { display: none; }
+table.need .needs_code_url a,
+table.need .needs_test_url a {
+  font-family: var(--font-stack--monospace);
+  font-size: 0.8em;
+  overflow-wrap: anywhere;
+}
+
+/* Status badge (status text is the first .needs_data of .needs_status) */
+table.need .needs_status .needs_data {
+  display: inline-block; padding: 0 0.55em; border-radius: 1em;
+  border: 1px solid currentColor; font-weight: 600; font-size: 0.8em;
+}
+table.need.needs_style_status_verified    .needs_status .needs_data { color: var(--need-ok); }
+table.need.needs_style_status_implemented .needs_status .needs_data { color: var(--need-warn); }
+table.need.needs_style_status_approved    .needs_status .needs_data,
+table.need.needs_style_status_draft       .needs_status .needs_data { color: var(--color-foreground-muted); }
+table.need.needs_style_status_deprecated  .needs_status .needs_data { color: var(--need-bad); }
+
+/* Tables (needtable matrix): scroll instead of clipping, readable columns */
+div.needstable_wrapper, .needs_table_wrapper, div.dataTables_wrapper { overflow-x: auto; }
+table.NEEDS_TABLE, table.needs_table, table.NEEDS_DATATABLES {
+  display: block; overflow-x: auto; width: 100%;
+}
+table.NEEDS_TABLE td, table.NEEDS_TABLE th { vertical-align: top; padding: 0.4rem 0.55rem; font-size: 0.9em; }
+table.NEEDS_TABLE td:first-child { white-space: nowrap; }
+table.NEEDS_TABLE td:nth-child(2) { min-width: 11rem; }
+/* evidence links: one per line, never broken mid-path */
+table.NEEDS_TABLE td a.reference.external { display: block; white-space: normal; overflow-wrap: anywhere; }
+table.NEEDS_TABLE td a[href*="/src/"], table.NEEDS_TABLE td a[href*="/tests/"],
+table.NEEDS_TABLE td a[href^="../src"], table.NEEDS_TABLE td a[href^="../tests"] {
+  font-family: var(--font-stack--monospace); font-size: 0.75em;
+}
+
+/* Underlined IDs: keep underscores visible */
+a { text-underline-offset: 0.18em; }
+a.reference.internal, table.need .needs-id a { text-decoration-thickness: 1px; }
+
+/* one consistent size for every metadata row, links included */
+table.need td.meta { font-size: 0.85em; }
+
+/* Status badges also carry a symbol, so status is not conveyed by colour alone */
+table.need.needs_style_status_verified    .needs_status .needs_data::before { content: "\2713\00a0"; }
+table.need.needs_style_status_implemented .needs_status .needs_data::before { content: "\25D0\00a0"; }
+table.need.needs_style_status_approved    .needs_status .needs_data::before { content: "\25CB\00a0"; }
+table.need.needs_style_status_draft       .needs_status .needs_data::before { content: "\270E\00a0"; }
+table.need.needs_style_status_deprecated  .needs_status .needs_data::before { content: "\2715\00a0"; }
+
+/* Dashboard / roadmap count tables */
+table.needs-summary { width: auto; min-width: 22rem; }
+table.needs-summary td, table.needs-summary th { text-align: right; padding: 0.3rem 0.8rem; }
+table.needs-summary td:first-child, table.needs-summary th:first-child { text-align: left; }
+table.needs-summary tr:last-child td { border-top: 2px solid var(--color-background-border); }
+
+/* Searchable register: keep the DataTables controls readable in both themes */
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+  background: var(--color-background-primary);
+  color: var(--color-foreground-primary);
+  border: 1px solid var(--color-background-border);
+  border-radius: 3px;
+}
+.dataTables_wrapper { color: var(--color-foreground-primary); }
+
+/* Section headings on the requirement pages: visible anchors for review comments */
+.content h2 { scroll-margin-top: 4rem; }
+
+/* Collapsed card header: level chip next to the status badge; expand/collapse-all toolbar */
+table.need .needs_head .needs_level .needs_data {
+  display: inline-block; padding: 0 0.55em; border-radius: 1em; margin-left: 0.3em;
+  border: 1px solid var(--color-background-border); color: var(--color-foreground-secondary);
+  font-size: 0.8em;
+}
+table.need .needs_head .needs_status { margin-left: 0.5em; }
+table.need .needs_collapse { cursor: pointer; float: right; }
+.need-toolbar { display: flex; gap: 0.5rem; margin: 0.8rem 0; }
+.need-toolbar button {
+  background: var(--color-background-secondary); color: var(--color-foreground-primary);
+  border: 1px solid var(--color-background-border); border-radius: 4px;
+  padding: 0.25rem 0.7rem; cursor: pointer; font-size: 0.85em;
+}
+.need-toolbar button:hover { background: var(--color-background-hover); }
+
+/* Neutral "key" box: Furo's tip admonition is solid green and hard to read in dark mode */
+.admonition.needs-key {
+  border-left: 4px solid var(--color-brand-primary);
+  background: var(--color-background-secondary);
+  color: var(--color-foreground-primary);
+  box-shadow: none;
+}
+.admonition.needs-key > .admonition-title {
+  background: var(--color-background-hover);
+  color: var(--color-foreground-primary);
+}
+.admonition.needs-key > .admonition-title::before { background-color: var(--color-brand-primary); }
+.admonition.needs-key code { background: var(--color-background-primary); }
+
+/* Expanded details: one readable size (the nested em sizes above compounded to ~9px),
+   and no repeat of status and level, which the card header already shows. */
+table.need td.meta { font-size: 0.9rem; }
+table.need .needs_meta .needs_label,
+table.need .needs_meta .needs_data,
+table.need .needs_meta a { font-size: 1em; }
+table.need .needs_meta .needs_code_url a,
+table.need .needs_meta .needs_test_url a { font-size: 0.9em; }
+table.need .needs_meta .needs_status,
+table.need .needs_meta .needs_level { display: none; }
+table.need .needs_meta .needs_label { color: var(--color-foreground-secondary); }
+
+/* Tables with many links: wrap inside the column instead of overflowing the page */
+table.NEEDS_TABLE { table-layout: auto; }
+table.NEEDS_TABLE td { overflow-wrap: anywhere; }
+table.NEEDS_TABLE td a.reference.internal { display: inline-block; margin-right: 0.3rem; }
+table.NEEDS_TABLE td a[href*="/src/"], table.NEEDS_TABLE td a[href*="/tests/"],
+table.NEEDS_TABLE td a[href^="../src"], table.NEEDS_TABLE td a[href^="../tests"] { font-size: 0.7em; }
