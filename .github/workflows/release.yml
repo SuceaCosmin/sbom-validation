@@ -49,7 +49,8 @@ jobs:
           $asset = "sbom-validation-$env:TAG-windows-x64.exe"
           Copy-Item dist/sbom-validation.exe "dist/$asset"
           $hash = (Get-FileHash "dist/$asset" -Algorithm SHA256).Hash.ToLower()
-          "$hash  $asset" | Set-Content -Encoding ascii "dist/$asset.sha256"
+          # LF-only, no BOM: `sha256sum -c` treats a trailing CR as part of the name.
+          [System.IO.File]::WriteAllText("$PWD/dist/$asset.sha256", "$hash  $asset`n")
           Write-Host "$hash  $asset"
 
       - name: Publish release
