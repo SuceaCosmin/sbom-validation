@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "profile_id": "vmodel",
+  "profile_version": "23",
+  "entries": [
+    {
+      "path": ".claude/skills/drive-workflow/SKILL.md",
+      "baseline": "787e5daacd8808f7120a1581e2bde70d6226825385133aff8b6433d8dcc6fcdd"
+    },
+    {
+      "path": ".github/agents/drive-workflow.agent.md",
+      "baseline": "787e5daacd8808f7120a1581e2bde70d6226825385133aff8b6433d8dcc6fcdd"
+    },
+    {
+      "path": ".agents/skills/drive-workflow/SKILL.md",
+      "baseline": "787e5daacd8808f7120a1581e2bde70d6226825385133aff8b6433d8dcc6fcdd"
+    },
+    {
+      "path": ".claude/skills/draft-requirement/SKILL.md",
+      "baseline": "c2e86237e24fc084ee494c79de777a90b21d776fb999bcb376825f02e9fae61e"
+    },
+    {
+      "path": ".github/agents/draft-requirement.agent.md",
+      "baseline": "c2e86237e24fc084ee494c79de777a90b21d776fb999bcb376825f02e9fae61e"
+    },
+    {
+      "path": ".agents/skills/draft-requirement/SKILL.md",
+      "baseline": "c2e86237e24fc084ee494c79de777a90b21d776fb999bcb376825f02e9fae61e"
+    },
+    {
+      "path": ".claude/skills/draft-arch/SKILL.md",
+      "baseline": "154077c964a01861fd12a16d1d261be4efc1e491b7d0be92897c9644d7b980cf"
+    },
+    {
+      "path": ".github/agents/draft-arch.agent.md",
+      "baseline": "154077c964a01861fd12a16d1d261be4efc1e491b7d0be92897c9644d7b980cf"
+    },
+    {
+      "path": ".agents/skills/draft-arch/SKILL.md",
+      "baseline": "154077c964a01861fd12a16d1d261be4efc1e491b7d0be92897c9644d7b980cf"
+    },
+    {
+      "path": ".claude/skills/draft-impl/SKILL.md",
+      "baseline": "b26d55eadae65571c808d9194745a7bdd9baeba9651dd28012b21145ee09c4eb"
+    },
+    {
+      "path": ".github/agents/draft-impl.agent.md",
+      "baseline": "b26d55eadae65571c808d9194745a7bdd9baeba9651dd28012b21145ee09c4eb"
+    },
+    {
+      "path": ".agents/skills/draft-impl/SKILL.md",
+      "baseline": "b26d55eadae65571c808d9194745a7bdd9baeba9651dd28012b21145ee09c4eb"
+    },
+    {
+      "path": ".claude/skills/draft-test/SKILL.md",
+      "baseline": "4624acdff1d66e84576165c2a02d5378f01019009b66a139a57a46196c3bf682"
+    },
+    {
+      "path": ".github/agents/draft-test.agent.md",
+      "baseline": "4624acdff1d66e84576165c2a02d5378f01019009b66a139a57a46196c3bf682"
+    },
+    {
+      "path": ".agents/skills/draft-test/SKILL.md",
+      "baseline": "4624acdff1d66e84576165c2a02d5378f01019009b66a139a57a46196c3bf682"
+    },
+    {
+      "path": ".claude/skills/record-decision/SKILL.md",
+      "baseline": "14c669e7c5cbbf34811170a7a7d7c12878fd9a47691f797c68b195299b2d9928"
+    },
+    {
+      "path": ".github/agents/record-decision.agent.md",
+      "baseline": "14c669e7c5cbbf34811170a7a7d7c12878fd9a47691f797c68b195299b2d9928"
+    },
+    {
+      "path": ".agents/skills/record-decision/SKILL.md",
+      "baseline": "14c669e7c5cbbf34811170a7a7d7c12878fd9a47691f797c68b195299b2d9928"
+    },
+    {
+      "path": ".claude/skills/change-request/SKILL.md",
+      "baseline": "c96504fb62cf048849830efb6fef1e67076431271be76f9d9ef1e6867c3628a1"
+    },
+    {
+      "path": ".github/agents/change-request.agent.md",
+      "baseline": "c96504fb62cf048849830efb6fef1e67076431271be76f9d9ef1e6867c3628a1"
+    },
+    {
+      "path": ".agents/skills/change-request/SKILL.md",
+      "baseline": "c96504fb62cf048849830efb6fef1e67076431271be76f9d9ef1e6867c3628a1"
+    },
+    {
+      "path": ".claude/skills/change-request-assess/SKILL.md",
+      "baseline": "88601907e2c160de063293b62ddb5ffaa2eba2800b74a90eda749789d229d557"
+    },
+    {
+      "path": ".github/agents/change-request-assess.agent.md",
+      "baseline": "88601907e2c160de063293b62ddb5ffaa2eba2800b74a90eda749789d229d557"
+    },
+    {
+      "path": ".agents/skills/change-request-assess/SKILL.md",
+      "baseline": "88601907e2c160de063293b62ddb5ffaa2eba2800b74a90eda749789d229d557"
+    },
+    {
+      "path": ".claude/skills/drive-change/SKILL.md",
+      "baseline": "ad5705a3428b6b6d17668e84a5bf4d20d9de7ac89b7f409e29159040ad57dd27"
+    },
+    {
+      "path": ".github/agents/drive-change.agent.md",
+      "baseline": "ad5705a3428b6b6d17668e84a5bf4d20d9de7ac89b7f409e29159040ad57dd27"
+    },
+    {
+      "path": ".agents/skills/drive-change/SKILL.md",
+      "baseline": "ad5705a3428b6b6d17668e84a5bf4d20d9de7ac89b7f409e29159040ad57dd27"
+    },
+    {
+      "path": ".claude/skills/pharaoh-onboard/SKILL.md",
+      "baseline": "ca60f16f1a88e7022aa00ccd4eeef32d93ba45935b1b5c70ef9b7523bdc8e166"
+    },
+    {
+      "path": ".github/agents/pharaoh-onboard.agent.md",
+      "baseline": "ca60f16f1a88e7022aa00ccd4eeef32d93ba45935b1b5c70ef9b7523bdc8e166"
+    },
+    {
+      "path": ".agents/skills/pharaoh-onboard/SKILL.md",
+      "baseline": "ca60f16f1a88e7022aa00ccd4eeef32d93ba45935b1b5c70ef9b7523bdc8e166"
+    },
+    {
+      "path": ".claude/skills/recover-requirement-from-code/SKILL.md",
+      "baseline": "05c7d1f0c0ea5a7e16c331d258d614b1adb4b38aff79da893b0efa30e483dc35"
+    },
+    {
+      "path": ".github/agents/recover-requirement-from-code.agent.md",
+      "baseline": "05c7d1f0c0ea5a7e16c331d258d614b1adb4b38aff79da893b0efa30e483dc35"
+    },
+    {
+      "path": ".agents/skills/recover-requirement-from-code/SKILL.md",
+      "baseline": "05c7d1f0c0ea5a7e16c331d258d614b1adb4b38aff79da893b0efa30e483dc35"
+    },
+    {
+      "path": ".claude/skills/recover-architecture-from-code/SKILL.md",
+      "baseline": "0f72fe3db7cee27db5b597bad9b784a401bd665a3eec3ac8b5f8cf8df91b5c82"
+    },
+    {
+      "path": ".github/agents/recover-architecture-from-code.agent.md",
+      "baseline": "0f72fe3db7cee27db5b597bad9b784a401bd665a3eec3ac8b5f8cf8df91b5c82"
+    },
+    {
+      "path": ".agents/skills/recover-architecture-from-code/SKILL.md",
+      "baseline": "0f72fe3db7cee27db5b597bad9b784a401bd665a3eec3ac8b5f8cf8df91b5c82"
+    },
+    {
+      "path": ".claude/skills/recover-need-from-cluster/SKILL.md",
+      "baseline": "5c9180670cd45bc37d3218f0d46c773015afe39de0eb73a98c324c8894ea07bb"
+    },
+    {
+      "path": ".github/agents/recover-need-from-cluster.agent.md",
+      "baseline": "5c9180670cd45bc37d3218f0d46c773015afe39de0eb73a98c324c8894ea07bb"
+    },
+    {
+      "path": ".agents/skills/recover-need-from-cluster/SKILL.md",
+      "baseline": "5c9180670cd45bc37d3218f0d46c773015afe39de0eb73a98c324c8894ea07bb"
+    },
+    {
+      "path": ".claude/skills/split-recovered-need/SKILL.md",
+      "baseline": "8eecd52ca0907ded82b26b4cc277c5d0baf1d4d1bb01c657c572121fcc4ecac6"
+    },
+    {
+      "path": ".github/agents/split-recovered-need.agent.md",
+      "baseline": "8eecd52ca0907ded82b26b4cc277c5d0baf1d4d1bb01c657c572121fcc4ecac6"
+    },
+    {
+      "path": ".agents/skills/split-recovered-need/SKILL.md",
+      "baseline": "8eecd52ca0907ded82b26b4cc277c5d0baf1d4d1bb01c657c572121fcc4ecac6"
+    },
+    {
+      "path": ".claude/skills/record-recovery-ledger/SKILL.md",
+      "baseline": "7b83f520d7ce8c4f6c2a325b14f5c145afe77fde7353856ba860b93059c6650e"
+    },
+    {
+      "path": ".github/agents/record-recovery-ledger.agent.md",
+      "baseline": "7b83f520d7ce8c4f6c2a325b14f5c145afe77fde7353856ba860b93059c6650e"
+    },
+    {
+      "path": ".agents/skills/record-recovery-ledger/SKILL.md",
+      "baseline": "7b83f520d7ce8c4f6c2a325b14f5c145afe77fde7353856ba860b93059c6650e"
+    },
+    {
+      "path": ".claude/skills/resolve-github-intent/SKILL.md",
+      "baseline": "2f223338c54c848ddeeab473f38c1e336c0eed21cfacab91745c7d0d5b8b34df"
+    },
+    {
+      "path": ".github/agents/resolve-github-intent.agent.md",
+      "baseline": "2f223338c54c848ddeeab473f38c1e336c0eed21cfacab91745c7d0d5b8b34df"
+    },
+    {
+      "path": ".agents/skills/resolve-github-intent/SKILL.md",
+      "baseline": "2f223338c54c848ddeeab473f38c1e336c0eed21cfacab91745c7d0d5b8b34df"
+    },
+    {
+      "path": ".claude/skills/review-feat/SKILL.md",
+      "baseline": "d74810f73ef2777ae1d2e9d6547b651e6796888acb26ec65a8f3b69e3e7c027d"
+    },
+    {
+      "path": ".github/agents/review-feat.agent.md",
+      "baseline": "d74810f73ef2777ae1d2e9d6547b651e6796888acb26ec65a8f3b69e3e7c027d"
+    },
+    {
+      "path": ".agents/skills/review-feat/SKILL.md",
+      "baseline": "d74810f73ef2777ae1d2e9d6547b651e6796888acb26ec65a8f3b69e3e7c027d"
+    },
+    {
+      "path": ".claude/skills/review-requirement/SKILL.md",
+      "baseline": "1ae8a9e1513956e7bdfd686d924deea237137172d4f3ea39b67b425d85957fd2"
+    },
+    {
+      "path": ".github/agents/review-requirement.agent.md",
+      "baseline": "1ae8a9e1513956e7bdfd686d924deea237137172d4f3ea39b67b425d85957fd2"
+    },
+    {
+      "path": ".agents/skills/review-requirement/SKILL.md",
+      "baseline": "1ae8a9e1513956e7bdfd686d924deea237137172d4f3ea39b67b425d85957fd2"
+    },
+    {
+      "path": ".claude/skills/review-arch/SKILL.md",
+      "baseline": "593225b223c14d78629739ec4587e30fe8d894342804492299e2eb667a79d164"
+    },
+    {
+      "path": ".github/agents/review-arch.agent.md",
+      "baseline": "593225b223c14d78629739ec4587e30fe8d894342804492299e2eb667a79d164"
+    },
+    {
+      "path": ".agents/skills/review-arch/SKILL.md",
+      "baseline": "593225b223c14d78629739ec4587e30fe8d894342804492299e2eb667a79d164"
+    },
+    {
+      "path": ".claude/skills/review-decision/SKILL.md",
+      "baseline": "b0e35051bcc5fbf01549d8e05b72e3d0a6357ec4d5291f1c1861aeffb3497a4e"
+    },
+    {
+      "path": ".github/agents/review-decision.agent.md",
+      "baseline": "b0e35051bcc5fbf01549d8e05b72e3d0a6357ec4d5291f1c1861aeffb3497a4e"
+    },
+    {
+      "path": ".agents/skills/review-decision/SKILL.md",
+      "baseline": "b0e35051bcc5fbf01549d8e05b72e3d0a6357ec4d5291f1c1861aeffb3497a4e"
+    },
+    {
+      "path": ".claude/commands/ubc-agent-next.md",
+      "baseline": "bf60d7dd2bcb06038695a991da58f7215b0e2a26a099dfcd0bb0bdf522c951d8"
+    },
+    {
+      "path": ".github/agents/workflow-author.agent.md",
+      "baseline": "e15c74b80cc507e370118fc26e4ca51772a92cd8b57a060e5d933b7fd4c8f071"
+    },
+    {
+      "path": "quality/feat.toml",
+      "baseline": "b5fb965249b634823c13c37e5be29cec319f286dc5eb170020d2456f38be0913"
+    },
+    {
+      "path": "quality/requirement.toml",
+      "baseline": "1f30f1227086e65c6228b06c8d768d6e63fc55a5cf1a9bfd6ea7ea0912d3c704"
+    },
+    {
+      "path": "quality/arch.toml",
+      "baseline": "d84397b9b4f01d553017237b6c42630938820e5dbac60bcccb4449a1b34b8ca0"
+    },
+    {
+      "path": "quality/decision.toml",
+      "baseline": "a764773efbcecd8914d3e56f7c6f72e6863d589063e2769ae84bb05ecfb0d86d"
+    }
+  ],
+  "project_dir": ""
+}
