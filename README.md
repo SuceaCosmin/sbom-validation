@@ -67,5 +67,14 @@ poetry run pytest
 poetry run sphinx-build -W -b html docs docs/_build/html
 ```
 
+### Standalone executable (Windows)
+
+```powershell
+.\scripts\build-exe.ps1 -Clean  # writes dist\sbom-validation.exe (git-ignored)
+poetry run pytest tests/e2e       # end-to-end checks of the executable
+```
+
+The build reuses the Poetry environment and pins from `poetry.lock`.
+
 See [docs/index.rst](docs/index.rst) for the requirements, standards references
 and the traceability matrix (build them with the command above).
